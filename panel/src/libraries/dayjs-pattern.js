@@ -77,16 +77,17 @@ export class DayjsPattern {
       end = start;
     }
 
-    // if everything is selected, return true
-    if (start === 0 && end === this.pattern.length) {
-      return true;
-    }
-
     // based on the current cursor position,
     // return the matching part
-    return this.parts.filter(
+    let part = this.parts.filter(
       (part) => part.start <= start && part.end >= end - 1
     )[0];
+
+    if (part) {
+      return part;
+    }
+
+    return this.parts.filter((part) => part.end >= end - 1).pop();
   }
 
   /**
@@ -136,10 +137,15 @@ export class DayjsPattern {
    * If the pattern only uses time units, a shorter format
    * with just time units is used.
    * @param {Object} dt
-   * @returns {string}
+   * @returns {string|null}
    */
   iso(dt) {
     dt = this.parse(dt);
+
+    if (!dt) {
+      return null;
+    }
+
     const format = this.isTime ? "HH:mm:ss" : "YYYY-MM-DD HH:mm:ss";
     return dt.format(format);
   }
@@ -148,7 +154,7 @@ export class DayjsPattern {
    * Generates dayjs object from input
    * @param {string} input
    * @param {string} format uses the pattern as default
-   * @returns {Object}
+   * @returns {Object|null}
    */
   parse(input, format) {
     if (!input) {
