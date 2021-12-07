@@ -39,19 +39,16 @@ export default {
           // if component doesn't exist, don't extend
           options.extends = null;
         }
+      }
 
-        if (options.mixins) {
-          options.mixins = options.mixins.map((mixin) => {
-            return typeof mixin === "string" ? mixins[mixin] : mixin;
-          });
-        }
+      if (options.mixins) {
+        options.mixins = options.mixins.map((mixin) => {
+          return typeof mixin === "string" ? mixins[mixin] : mixin;
+        });
+      }
 
-        if (components[name]) {
-          window.console.warn(`Plugin is replacing "${name}"`);
-        }
-
-        app.component(name, options);
-        components[name] = app.options.components[name];
+      if (components[name]) {
+        window.console.warn(`Plugin is replacing "${name}"`);
       }
 
       app.component(name, options);
