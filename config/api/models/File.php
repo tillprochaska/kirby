@@ -62,7 +62,7 @@ return [
         'panelIcon' => function (File $file) {
             // TODO: remove in 3.7.0
             // @codeCoverageIgnoreStart
-            deprecated('The API field file.panelIcon has been deprecated and will be removed in 3.7.0. Use file.panelImage instead');
+            App::deprecated('The API field file.panelIcon has been deprecated and will be removed in 3.7.0. Use file.panelImage instead');
             return $file->panel()->image();
         // @codeCoverageIgnoreEnd
         },

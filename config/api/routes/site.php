@@ -59,7 +59,7 @@ return [
         'action'  => function () {
             // @codeCoverageIgnoreStart
             if ($this->route->pattern() === 'site/children/blueprints') {
-                deprecated('`GET site/children/blueprints` API endpoint has been deprecated and will be removed in 3.7.0. Use `GET site/blueprints` instead.');
+                App::deprecated('`GET site/children/blueprints` API endpoint has been deprecated and will be removed in 3.7.0. Use `GET site/blueprints` instead.');
             }
             // @codeCoverageIgnoreEnd
             return $this->site()->blueprints($this->requestQuery('section'));
